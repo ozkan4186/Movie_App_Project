@@ -34,6 +34,7 @@ const firebaseConfig = {
   messagingSenderId: "535955848556",
   appId: "1:535955848556:web:6a4b8bcfcdea91aae24749",
 };
+//
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -111,7 +112,7 @@ export const signUpProvider = (navigate) => {
     .then((result) => {
       console.log(result);
       navigate("/");
-      toastSuccessNotify("Logged in successfully!");
+      toastSuccessNotify("Logged out successfully!");
     })
     .catch((error) => {
       // Handle Errors here.

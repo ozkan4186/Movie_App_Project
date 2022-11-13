@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { forgotPassword, signIn, signUpProvider } from "../auth/firebase";
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    signIn(email, password, navigate);
+  };
 
+  const handleProviderLogin = () => {
+    signUpProvider(navigate);
   };
 
   return (
@@ -47,6 +52,7 @@ const Register = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Enter your email adress.."
+                value={email || ""}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <div id="emailHelp" className="form-text">
@@ -65,6 +71,7 @@ const Register = () => {
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="Enter your email password.."
+                value={password || ""}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -73,8 +80,8 @@ const Register = () => {
                 color: "red",
                 textDecoration: "none",
               }}
-            >
-              Forgot Password?
+                 onClick={()=>forgotPassword(email)}>Forgot Password?
+            
             </div>
             <br />
             <button type="submit" className="btn btn-danger w-100">
@@ -82,7 +89,11 @@ const Register = () => {
             </button>
 
             <br />
-            <button type="submit" className="btn btn-danger w-100">
+            <button
+              onClick={handleProviderLogin}
+              type="submit"
+              className="btn btn-danger w-100"
+            >
               Continue with Google
             </button>
           </form>
@@ -92,4 +103,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
